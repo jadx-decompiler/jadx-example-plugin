@@ -1,4 +1,4 @@
-package jadx.api.plugins.example;
+package jadx.plugins.example;
 
 import jadx.api.plugins.pass.JadxPassInfo;
 import jadx.api.plugins.pass.impl.OrderedJadxPassInfo;

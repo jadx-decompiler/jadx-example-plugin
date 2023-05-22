@@ -1,4 +1,4 @@
-package jadx.api.plugins.example;
+package jadx.plugins.example;
 
 import jadx.api.plugins.JadxPlugin;
 import jadx.api.plugins.JadxPluginContext;

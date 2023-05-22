@@ -1,4 +1,4 @@
-package jadx.api.plugins.example;
+package jadx.plugins.example;
 
 import java.io.File;
 import java.net.URISyntaxException;
