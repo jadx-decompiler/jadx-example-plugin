@@ -20,5 +20,6 @@ public class JadxExamplePlugin implements JadxPlugin {
 		if (options.isEnable()) {
 			context.addPass(new AddCommentPass());
 		}
+		context.registerInputsHashSupplier(options::toString);
 	}
 }

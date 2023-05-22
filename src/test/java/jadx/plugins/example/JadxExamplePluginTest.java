@@ -1,14 +1,13 @@
 package jadx.plugins.example;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-
-import org.junit.jupiter.api.Test;
-
 import jadx.api.JadxArgs;
 import jadx.api.JadxDecompiler;
 import jadx.api.JavaClass;
+import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
