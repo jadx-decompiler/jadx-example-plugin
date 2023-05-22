@@ -7,7 +7,8 @@ plugins {
 }
 
 dependencies {
-    implementation("io.github.skylot:jadx-core:1.5.0-SNAPSHOT") {
+	// use compile only scope to exclude jadx-core and its dependencies from result jar
+    compileOnly("io.github.skylot:jadx-core:1.5.0-SNAPSHOT") {
         isChanging = true
     }
 
@@ -16,7 +17,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
 
-    testRuntimeOnly("io.github.skylot:jadx-smali-input:1.5.0-SNAPSHOT") {
+	testImplementation("io.github.skylot:jadx-smali-input:1.5.0-SNAPSHOT") {
         isChanging = true
     }
 }
@@ -39,11 +40,7 @@ tasks {
         useJUnitPlatform()
     }
     val shadowJar = withType(ShadowJar::class) {
-        archiveClassifier.set("")
-        dependencies {
-            // jadx-core can be safely excluded from result jar
-            exclude(dependency("io.github.skylot:jadx-core"))
-        }
+        archiveClassifier.set("") // remove '-all' suffix
     }
 
     // copy result jar into "build/dist" directory
