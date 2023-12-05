@@ -4,6 +4,10 @@ plugins {
     `java-library`
 
     id("com.github.johnrengelman.shadow") version "8.1.1"
+
+	// auto update dependencies with 'useLatestVersions' task
+	id("se.patrikerdes.use-latest-versions") version "0.2.18"
+	id("com.github.ben-manes.versions") version "0.50.0"
 }
 
 dependencies {
@@ -12,10 +16,10 @@ dependencies {
         isChanging = true
     }
 
-    testImplementation("ch.qos.logback:logback-classic:1.4.7")
+    testImplementation("ch.qos.logback:logback-classic:1.4.14")
     testImplementation("org.assertj:assertj-core:3.24.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
 
 	testImplementation("io.github.skylot:jadx-smali-input:1.5.0-SNAPSHOT") {
         isChanging = true
@@ -49,6 +53,6 @@ tasks {
         dependsOn(withType(Jar::class))
 
         from(shadowJar)
-        into("$buildDir/dist")
+        into(layout.buildDirectory.dir("dist"))
     }
 }
