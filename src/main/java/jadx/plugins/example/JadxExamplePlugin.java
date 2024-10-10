@@ -3,6 +3,7 @@ package jadx.plugins.example;
 import jadx.api.plugins.JadxPlugin;
 import jadx.api.plugins.JadxPluginContext;
 import jadx.api.plugins.JadxPluginInfo;
+import jadx.api.plugins.JadxPluginInfoBuilder;
 
 public class JadxExamplePlugin implements JadxPlugin {
 	public static final String PLUGIN_ID = "example-plugin";
@@ -11,7 +12,11 @@ public class JadxExamplePlugin implements JadxPlugin {
 
 	@Override
 	public JadxPluginInfo getPluginInfo() {
-		return new JadxPluginInfo(PLUGIN_ID, "Jadx example plugin", "Add jadx watermark comment to every class");
+		return JadxPluginInfoBuilder.pluginId(PLUGIN_ID)
+				.name("Jadx example plugin")
+				.description("Add jadx watermark comment to every class")
+				.homepage("https://github.com/jadx-decompiler/jadx-example-plugin")
+				.build();
 	}
 
 	@Override

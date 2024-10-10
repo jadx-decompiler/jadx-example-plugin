@@ -1,5 +1,6 @@
 package jadx.plugins.example;
 
+import jadx.api.data.CommentStyle;
 import jadx.api.plugins.pass.JadxPassInfo;
 import jadx.api.plugins.pass.impl.OrderedJadxPassInfo;
 import jadx.api.plugins.pass.types.JadxDecompilePass;
@@ -27,7 +28,7 @@ public class AddCommentPass implements JadxDecompilePass {
 
 	@Override
 	public boolean visit(ClassNode cls) {
-		cls.addCodeComment(comment);
+		cls.addCodeComment(comment, CommentStyle.BLOCK);
 		return false;
 	}
 
