@@ -1,4 +1,6 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import java.util.Locale
 
 plugins {
     `java-library`
@@ -7,11 +9,11 @@ plugins {
 
 	// auto update dependencies with 'useLatestVersions' task
 	id("se.patrikerdes.use-latest-versions") version "0.2.18"
-	id("com.github.ben-manes.versions") version "0.51.0"
+	id("com.github.ben-manes.versions") version "0.52.0"
 }
 
 dependencies {
-	val jadxVersion = "1.5.1-SNAPSHOT"
+	val jadxVersion = "1.5.1"
 	val isJadxSnapshot = jadxVersion.endsWith("-SNAPSHOT")
 
 	// use compile only scope to exclude jadx-core and its dependencies from result jar
@@ -22,10 +24,10 @@ dependencies {
 	testImplementation("io.github.skylot:jadx-smali-input:$jadxVersion") {
         isChanging = isJadxSnapshot
     }
-	testImplementation("ch.qos.logback:logback-classic:1.5.9")
-	testImplementation("org.assertj:assertj-core:3.26.3")
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.2")
-	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.2")
+	testImplementation("ch.qos.logback:logback-classic:1.5.18")
+	testImplementation("org.assertj:assertj-core:3.27.3")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.1")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.12.1")
 }
 
 repositories {
@@ -59,4 +61,19 @@ tasks {
         from(shadowJar)
         into(layout.buildDirectory.dir("dist"))
     }
+}
+
+
+tasks.named<DependencyUpdatesTask>("dependencyUpdates") {
+	rejectVersionIf {
+		// disallow release candidates as upgradable versions from stable versions
+		isNonStable(candidate.version) && !isNonStable(currentVersion)
+	}
+}
+
+fun isNonStable(version: String): Boolean {
+	val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase(Locale.getDefault()).contains(it) }
+	val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+	val isStable = stableKeyword || regex.matches(version)
+	return isStable.not()
 }

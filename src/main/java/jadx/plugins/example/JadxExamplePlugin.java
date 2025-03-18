@@ -16,6 +16,7 @@ public class JadxExamplePlugin implements JadxPlugin {
 				.name("Jadx example plugin")
 				.description("Add jadx watermark comment to every class")
 				.homepage("https://github.com/jadx-decompiler/jadx-example-plugin")
+				.requiredJadxVersion("1.5.1, r2333")
 				.build();
 	}
 

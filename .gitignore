@@ -22,6 +22,8 @@ classes/
 idea/
 .gradle/
 
+*.sh
+
 *-tmp/
 **/tmp/
 
@@ -30,4 +32,3 @@ idea/
 *.log
 *.cfg
 *.orig
-
